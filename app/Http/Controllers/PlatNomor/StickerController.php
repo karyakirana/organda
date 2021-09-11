@@ -25,11 +25,11 @@ class StickerController extends Controller
      */
     public function listData()
     {
-        $data = Sticker::with(['sopir', 'customer'])->latest()->get();
+        $data = Sticker::with(['mobil', 'customer'])->latest()->get();
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('mobil', function($row){
-                return $row->mobil->nopol_mobil;
+                return $row->mobil->nopol_mobil ?? '';
             })
             ->addColumn('customer', function ($row){
                 return $row->customer->nama_cust;
@@ -41,6 +41,7 @@ class StickerController extends Controller
                 $print = '<a href="#" class="btn btn-sm btn-clean btn-icon" id="btnPrint" data-value="'.$row->id.'" title="print"><i class="flaticon-technology"></i></a>';
                 return $edit.$show.$delete.$print;
             })
+            ->rawColumns(['Action'])
             ->make(true);
     }
 
@@ -76,14 +77,14 @@ class StickerController extends Controller
                 'tgl_sticker'=>date('Y-m-d', strtotime($request->tglSticker)),
                 'masa_berlaku'=> ($request->masaBerlaku) ? date('Y-m-d', strtotime($request->tglBerlaku)) : null,
                 'kode_sticker'=>'-',
-                'id_sopir'=>$request->idSopir,
+                'id_mobil'=>$request->idPlatNomor,
                 'id_cust'=>$request->idCustomer,
                 'perusahaan'=>$request->perusahaan,
                 'status'=>$request->status,
                 'keterangan'=>$request->keterangan
             ]
         );
-        return response()->json(['status'=>true, 'keterangan'=>$data]);
+        return response()->redirectTo('/sticker');
     }
 
     /**
@@ -106,8 +107,21 @@ class StickerController extends Controller
      */
     public function edit($id)
     {
-        $data = Sticker::find($id);
-        return response()->json($data);
+        $sticker = Sticker::with(['mobil', 'customer'])->find($id);
+        $data = [
+            'id_cust'=>$sticker->id_cust,
+            'idPlatNomor'=>$sticker->id_mobil,
+            'id'=>$sticker->id,
+            'tgl_sticker'=>date('Y-m-d', strtotime($sticker->tgl_sticker)),
+            'masa_berlaku'=> ($sticker->masa_berlaku) ? date('Y-m-d', strtotime($sticker->masa_berlaku)) : '',
+            'nama_customer'=>$sticker->customer->nama_cust,
+            'nopol_mobil'=>$sticker->mobil->nopol_mobil,
+            'perusahaan'=>$sticker->perusahaan,
+            'status'=>$sticker->status,
+            'keterangan'=>$sticker->keterangan,
+        ];
+//        return $sticker;
+        return view('pages.nopol.stickerTrans', $data);
     }
 
     /**

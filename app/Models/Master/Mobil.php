@@ -10,10 +10,11 @@ class Mobil extends Model
 {
     use HasFactory;
     protected $table = 'mobil';
+    protected $primaryKey = 'id_mobil';
     protected $keyType = 'string';
     protected $fillable = [
         'id_mobil',
-        'id_customer',
+        'id_cust',
         'jenis_mobil',
         'nopol_mobil',
         'status'
@@ -21,7 +22,7 @@ class Mobil extends Model
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'id_mobil', 'id_mobil');
+        return $this->belongsTo(Customer::class, 'id_cust', 'id_cust');
     }
 
     public function sticker()
