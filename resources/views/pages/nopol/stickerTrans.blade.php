@@ -73,10 +73,17 @@
                     </div>
                     <div class="col-lg-6">
                         <label>Status</label>
+                        @if(isset($status))
                         <select name="status" id="status" class="form-control">
                             <option value="buka" {{ ($status == 'buka') ? 'selected' : '' }}>Buka</option>
                             <option value="blokir" {{ ($status == 'blokir') ? 'selected' : '' }}>Blokir</option>
                         </select>
+                        @else
+                            <select name="status" id="status" class="form-control">
+                                <option value="buka">Buka</option>
+                                <option value="blokir">Blokir</option>
+                            </select>
+                        @endif
                         <span class="form-text text-danger"></span>
                     </div>
                 </div>
