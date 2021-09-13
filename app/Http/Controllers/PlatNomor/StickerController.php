@@ -38,7 +38,7 @@ class StickerController extends Controller
                 $edit = '<a href="#" class="btn btn-sm btn-clean btn-icon" id="btnEdit" data-value="'.$row->id.'" title="edit"><i class="la la-edit"></i></a>';
                 $show = '<a href="#" class="btn btn-sm btn-clean btn-icon" id="btnShow" data-value="'.$row->id.'" title="show"><i class="flaticon2-indent-dots"></i></a>';
                 $delete = '<a href="#" class="btn btn-sm btn-clean btn-icon" id="btndelete" data-value="'.$row->id_jual.'" title="delete"><i class="flaticon2-trash"></i></a>';
-                $print = '<a href="#" class="btn btn-sm btn-clean btn-icon" id="btnPrint" data-value="'.$row->id.'" title="print"><i class="flaticon-technology"></i></a>';
+                $print = '<a href="/sticker/print/'.$row->id.'" class="btn btn-sm btn-clean btn-icon" id="btnPrint" data-value="'.$row->id.'" title="print"><i class="flaticon-technology"></i></a>';
                 return $edit.$show.$delete.$print;
             })
             ->rawColumns(['Action'])

@@ -48,4 +48,9 @@ Route::post('/sticker/', [\App\Http\Controllers\PlatNomor\StickerController::cla
 Route::get('/sticker/{id}', [\App\Http\Controllers\PlatNomor\StickerController::class, 'edit']);
 Route::delete('/sticker/{id}', [\App\Http\Controllers\PlatNomor\StickerController::class, 'destroy']);
 
+/**
+ * Print Sticker
+ */
+Route::get('/sticker/print/{id}', [\App\Http\Controllers\PlatNomor\StickerReportController::class, 'print']);
+
 require __DIR__.'/auth.php';
