@@ -95,7 +95,7 @@
                     <table class="table" style="border:3px black solid; margin-left:70px; margin-top:10px;">
                         <tr>
                             <td class="tb-text" style="width: 10%; text-align:left; ">Nama Perusahaan</td>
-                            <td class="tb-text2" style="width: 90%; text-align:left; vertical-align: middle;">UD. TERUS JAYA</td>
+                            <td class="tb-text2" style="width: 90%; text-align:left; vertical-align: middle;">{{ $sticker->perusahaan ?? '' }}</td>
                         </tr>
                         <tr>
                             <td class="tb-text" style="border-top: 3px black solid; width: 20%; text-align:left;">Nomor Polisi</td>

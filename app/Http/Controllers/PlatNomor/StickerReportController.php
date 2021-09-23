@@ -16,6 +16,7 @@ class StickerReportController extends Controller
         $nopol = Mobil::where('id_mobil', $get)->first()->nopol_mobil;
 
         view()->share('nopol',$nopol);
+        view()->share('sticker', Sticker::where('id', $id)->first());
 
         $pdf = PDF::loadView('pages.nopol.stickerPrint');
         $pdf->setOrientation('portrait');
